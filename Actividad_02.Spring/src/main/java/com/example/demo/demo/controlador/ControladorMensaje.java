@@ -16,6 +16,11 @@ public class ControladorMensaje {
 		//Esta clase es muy buena para concatenar Strings
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("<!DOCTYPE html>");
+		
+		
+		
+		
+		
 		buffer.append("<html>");
 		buffer.append("<head>");
 		buffer.append("<title>Prueba html</title>");
