@@ -45,7 +45,7 @@ public class ControladorVideojuego {
 	
 	@GetMapping(path="videojuegos",produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Videojuego>> listarPersonas(
-			@RequestParam(name="nombre",required=false) String nombre) {
+			@RequestParam(name="compañia",required=false) String nombre) {
 		List<Videojuego> listaPersonas = null;
 		//Si no me viene el nombre, devolvemos toda la lista
 		if(nombre == null) {

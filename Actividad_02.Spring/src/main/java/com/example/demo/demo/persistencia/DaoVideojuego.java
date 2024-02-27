@@ -77,7 +77,7 @@ public class DaoVideojuego {
 	public List<Videojuego> listByNombre(String nombre) {
 		List<Videojuego> listaPersonasAux = new ArrayList<Videojuego>();
 		for (Videojuego p : listaVideojuegos) {
-			if (p.getNombre().equalsIgnoreCase(nombre)) {// contains()
+			if (p.getCompañia().equalsIgnoreCase(nombre)) {// contains()
 				listaPersonasAux.add(p);
 			}
 		}
