@@ -7,16 +7,11 @@ import org.springframework.stereotype.Component;
 
 import com.example.demo.demo.entidad.Videojuego;
 
-
-
-
-
-
-
 @Component
 public class DaoVideojuego {
 	public List<Videojuego> listaVideojuegos;
 	public int contador;
+
 	public DaoVideojuego() {
 		System.out.println("DaoVideojuego -> Creando la lista de videojuegos!");
 		listaVideojuegos = new ArrayList<Videojuego>();
@@ -32,7 +27,7 @@ public class DaoVideojuego {
 		listaVideojuegos.add(p4);
 		listaVideojuegos.add(p5);
 	}
-	
+
 	public Videojuego get(int posicion) {
 		try {
 			return listaVideojuegos.get(posicion);
@@ -83,8 +78,5 @@ public class DaoVideojuego {
 		}
 		return listaPersonasAux;
 	}
-	
-	
-	
 
 }

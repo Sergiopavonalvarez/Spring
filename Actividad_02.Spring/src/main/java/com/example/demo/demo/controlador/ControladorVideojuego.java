@@ -18,71 +18,68 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.demo.entidad.Videojuego;
 import com.example.demo.demo.persistencia.DaoVideojuego;
 
-
 @RestController
 public class ControladorVideojuego {
 	@Autowired
+
 	private DaoVideojuego daoVideojuego;
 
-	@GetMapping(path="videojuegos/{id}",produces = MediaType.APPLICATION_JSON_VALUE)	
+	@GetMapping(path = "videojuegos/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Videojuego> getPersona(@PathVariable("id") int id) {
 		System.out.println("Buscando persona con id: " + id);
 		Videojuego p = daoVideojuego.get(id);
-		if(p != null) {
-			return new ResponseEntity<Videojuego>(p,HttpStatus.OK);//200 OK
-		}else {
-			return new ResponseEntity<Videojuego>(HttpStatus.NOT_FOUND);//404 NOT FOUND
+		if (p != null) {
+			return new ResponseEntity<Videojuego>(p, HttpStatus.OK);// 200 OK
+		} else {
+			return new ResponseEntity<Videojuego>(HttpStatus.NOT_FOUND);// 404 NOT FOUND
 		}
 	}
 
-	@PostMapping(path="videojuegos",consumes=MediaType.APPLICATION_JSON_VALUE,
-			produces=MediaType.APPLICATION_JSON_VALUE)
+	// consumimos json, producimos json
+	@PostMapping(path = "videojuegos", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Videojuego> altaPersona(@RequestBody Videojuego p) {
 		System.out.println("altaPersona: objeto persona: " + p);
 		daoVideojuego.add(p);
-		return new ResponseEntity<Videojuego>(p,HttpStatus.CREATED);//201 CREATED
+		return new ResponseEntity<Videojuego>(p, HttpStatus.CREATED);// 201 CREATED
 	}
-	
-	@GetMapping(path="videojuegos",produces = MediaType.APPLICATION_JSON_VALUE)
+
+	@GetMapping(path = "videojuegos", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Videojuego>> listarPersonas(
-			@RequestParam(name="compañia",required=false) String nombre) {
+			@RequestParam(name = "compañia", required = false) String nombre) {
 		List<Videojuego> listaPersonas = null;
-		//Si no me viene el nombre, devolvemos toda la lista
-		if(nombre == null) {
+		// Si no me viene el nombre, devolvemos toda la lista
+		if (nombre == null) {
 			System.out.println("Listando los videojuegos");
-			listaPersonas = daoVideojuego.list();			
-		}else {
+			listaPersonas = daoVideojuego.list();
+		} else {
 			System.out.println("Listando los videojuegos por nombre: " + nombre);
 			listaPersonas = daoVideojuego.listByNombre(nombre);
 		}
 		System.out.println(listaPersonas);
-		return new ResponseEntity<List<Videojuego>>(listaPersonas,HttpStatus.OK);
+		return new ResponseEntity<List<Videojuego>>(listaPersonas, HttpStatus.OK);
 	}
-	
-	
-	@PutMapping(path="videojuegos/{id}",consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Videojuego> modificarPersona(
-			@PathVariable("id") int id, 
-			@RequestBody Videojuego p) {
+
+	@PutMapping(path = "videojuegos/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Videojuego> modificarPersona(@PathVariable("id") int id, @RequestBody Videojuego p) {
 		System.out.println("ID a modificar: " + id);
 		System.out.println("Datos a modificar: " + p);
 		p.setId(id);
 		Videojuego pUpdate = daoVideojuego.update(p);
-		if(pUpdate != null) {
-			return new ResponseEntity<Videojuego>(HttpStatus.OK);//200 OK
-		}else {
-			return new ResponseEntity<Videojuego>(HttpStatus.NOT_FOUND);//404 NOT FOUND
+		if (pUpdate != null) {
+			return new ResponseEntity<Videojuego>(HttpStatus.OK);// 200 OK
+		} else {
+			return new ResponseEntity<Videojuego>(HttpStatus.NOT_FOUND);// 404 NOT FOUND
 		}
 	}
-	
-	@DeleteMapping(path="videojuegos/{id}")
+
+	@DeleteMapping(path = "videojuegos/{id}")
 	public ResponseEntity<Videojuego> borrarPersona(@PathVariable("id") int id) {
 		System.out.println("ID a borrar: " + id);
 		Videojuego p = daoVideojuego.delete(id);
-		if(p != null) {
-			return new ResponseEntity<Videojuego>(p,HttpStatus.OK);//200 OK
-		}else {
-			return new ResponseEntity<Videojuego>(HttpStatus.NOT_FOUND);//404 NOT FOUND
+		if (p != null) {
+			return new ResponseEntity<Videojuego>(p, HttpStatus.OK);// 200 OK
+		} else {
+			return new ResponseEntity<Videojuego>(HttpStatus.NOT_FOUND);// 404 NOT FOUND
 		}
 	}
 
